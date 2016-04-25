@@ -1,0 +1,111 @@
+<?php
+  ini_set('display_errors',1);
+//  error_reporting(E_ALL);     
+  session_start();
+  $user = $_POST["user"];
+  $pswd = $_POST["pswd"];
+  $rows1="";
+  if ($user && $pswd) {
+    include("db.php5");
+    $db = new mysqli($hostname, $username, $password, $dbname);
+    if (mysqli_connect_errno()) {
+      echo "Failed to connect to MySql DB";
+    }
+//  echo "<h2>Logging in ".$user."</h2>";
+    $query = "Select userId, userName, userStat, userType from users where userId = '$user' and password = password('$pswd')";
+    $logQry = $db->query($query);
+    $rows = $logQry->num_rows;
+    if ($rows == 1) {
+      $row=$logQry->fetch_row();
+      $userId   = $row[0];
+      $userName = $row[1];
+      $userStat = $row[2];
+      $userType = $row[3];
+      $_SESSION['userId']=$userId;
+      $_SESSION['userStat']=$userStat;
+      $_SESSION['userType']=$userType;
+      $_SESSION['db']="prod";   //http://localhost:81/index.html
+      header("Location: http://localhost:81/configs.html", true);
+      exit;
+    } else {
+      echo " \n\n\n\n ";
+      echo " ";
+      echo "  ";
+      echo "                               password mismatch";
+    }
+  } else {
+     $rows1 = $rows1 . " missing id & pswd/";
+     echo $rows1;
+ }
+?>
+<html>
+<head>
+<meta http-equiv="Content-type" content='text/html;charset=UTF-8'>
+<style>
+.banner {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 20%;
+	height: 60px;
+	background-color: #004080;
+}
+
+.menuLine {
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	height: 25px;
+	width: 100%;
+	background-color: #4080A0;
+}
+
+.thePage {
+	position: absolute;
+	top: 100px;
+}
+</style>
+<title> Welcome </title>
+</head>
+<body>
+<!-- <img class="banner" src="./images/banqTips.png"/> -->
+<div class="thePage">
+<?php
+     $user = $_POST["user"];
+     $pswd = $_POST["pswd"];
+     if ($user && $pswd) {
+     	   echo "<h2>You did not login; please try again" . $rows . ".</h2>";
+     	   $_SESSION['userId']="";
+     	   $_SESSION['userStat']="";
+     	   $_SESSION['userType']="";
+     	   $_SESSION['db']="";
+     } else {
+     	if ($user || $pswd) {
+     	   $_SESSION['userId']="";
+     	   $_SESSION['userStat']="";
+     	   $_SESSION['userType']="";
+     	   $_SESSION['db']="";
+     	   echo "<h2>Please enter both fields</h2>";
+     	   }
+     	else {
+     	   echo "<h2>To proceed, you must login" .$rows ."</h2>";
+     	   $user = "";
+     	   $pswd = "";
+     	   $_SESSION['userId']="";
+     	   $_SESSION['userStat']="";
+     	   $_SESSION['userType']="";
+     	   $_SESSION['db']="";
+     	}
+     }
+?>
+   <div id="logonform">
+      <form method="post" action = "http://localhost:81/index.html">
+         Enter your user name <input type ="text" name="user" size="20" value="<?php echo $user;?>"><br>
+         Enter your password <input type ="password" name="pswd" size="15"> <br>
+         <input type="submit" value="Click to login">
+         <input type="reset" value="Click to reset">
+      </form>
+   </div>
+  </div>
+ </body>
+</html>

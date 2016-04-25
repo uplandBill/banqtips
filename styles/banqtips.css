@@ -1,0 +1,566 @@
+  	
+html {
+  width: 1540px;
+  height: 100%;
+}
+
+#modal { position: absolute; 
+        height: 1120px;
+        width: 1540px;
+	display:none; 
+	z-index:10000; 
+	background-color: #7F7F7F; 
+  opacity: 0.5;
+  filter: alpha(opacity=50);  /* for IE, ugh */
+  }
+
+.popup { z-index:10002; 
+	position: absolute; 
+	top: 200px;
+	left: 450px;
+	width: 450px;
+	height: 100px;
+  color: #6CC280;
+  background: rgb(54, 25, 25);  /* Fall-back for browsers that don't support rgba */
+  background: rgba(0, 0, 0, 1);
+  opacity: 1;
+  filter: alpha(opacity=100);  /* for IE, ugh */
+	display: none; 
+  border: 5px solid #000;
+}
+
+.listbox { z-index:10001; 
+	position: absolute; 
+	top: 50px;
+	left: 550px;
+	width: 400px;
+	height: 700px;
+        color: #6CC280;
+    background: rgb(68, 87, 99); /* Fall-back for browsers that don't support rgba */
+    background: rgba(68, 87, 99, 1);
+        opacity: 1;
+        filter: alpha(opacity=100);  /* for IE, ugh */
+	display: none; 
+        border: 10px solid #7b91fc;
+}
+
+#popEeDiv {
+	position: relative; 
+	top: 0px;
+	left: 10px;
+	width: 380px;
+	height: 600px;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #EEF6FF;
+ }
+
+.trigger {
+    display: none;
+}
+
+.triggers {
+    display: block;
+}
+
+.trigger:hover {
+    display: block;
+}
+
+#thePage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 800px;
+  width: 1540px;
+}
+
+.footer {
+	bottom: 0px;
+	position: absolute;
+}
+
+#tipshead {
+  position: absolute;
+  top :0px;
+  background-image: url('../images/banner.gif');
+  background-repeat: repeat-x;
+  width: 1540px;
+  left: 0;
+  height: 100px;
+  overflow: auto;
+}
+
+.banPropImg {
+ position: absolute;
+ top: 0px;
+ left: 1240px;
+}
+
+.mMenuButton {
+position: absolute;
+top: 70px;
+left: 60px;
+}
+
+.mainMenu {
+position: absolute;
+top: 100px;
+left: 40px;
+width: 240px;
+background-color: #CDD4D4;  //#C5F4FF;
+//f6ca1d;
+overflow: auto;
+z-index: 2;
+}
+
+.reportsButton {
+position: absolute;
+top: 70px;
+left: 180px;
+}
+
+.reportsMenu {
+position: absolute;
+top: 100px;
+left: 160px;
+width: 240px;
+background-color: #CDD4D4;  //#C5F4FF;
+//#f6ca1d;
+overflow: auto;
+z-index: 2;
+}
+
+.configButton {
+position: absolute;
+top: 70px;
+left: 300px;
+}
+
+.configMenu {
+position: absolute;
+top: 100px;
+left: 280px;
+width: 240px;
+background-color: #CDD4D4;  //#C5F4FF;
+//#f6ca1d;
+overflow: auto;
+z-index: 2;
+}
+
+.leftCol {
+  position: absolute;
+  top :100px;
+  left: 0px;
+  width: 40px;
+  height: 690px;
+  background-image: url('../images/leftGrad.png');
+}
+
+.mainformW1 {
+  width: 1200px;
+}
+
+.mainformW2 {
+  width: 1500px;
+}
+
+.mainform {
+  position: relative;
+  top: 100px;
+  left: 40px;
+  height: 690px;
+}
+
+.formarea {
+  background-color: #C09F66;
+  overflow: hidden;
+}
+
+.listarea {
+  background-color: #c2ffff;
+  overflow: auto;
+}
+
+.funcForm {
+  position: absolute;
+  top :0px;
+  left:0px;
+//  background-color: #CCB366;
+  background-image: url('../images/formGrad.png');
+  width: 1000px;
+  height: 230px;
+}
+
+.statusResult {
+  position: absolute;
+  top: 210px;
+  left: 10px;
+  height: 20px;
+  width : 500px;
+  color: red;
+}
+
+.funcTable {
+ width: 100%;
+}
+
+#bodiesTab {
+  position: absolute;
+  top: 25px;
+  left: 820px;
+}
+
+#setDefaults {
+  position: absolute;
+  top: 155px;
+  left: 590px;
+}
+
+.empGroup {
+  font-family:"Times New Roman", Times, serif;
+  font-size:14px;
+}
+
+.empGrpType {
+  font-family:"Times New Roman", Times, serif;
+  font-size:12px;
+}
+
+.empCounts {
+  position: absolute;
+  top :0px;
+  left:1000px;
+//  background-image: url('../images/empCntsGrad.gif');
+  background-image: url('../images/countsGrad.png');
+  background-repeat: repeat-x;
+  width: 200px;
+  height: 200px;
+}
+
+.empGrid {
+  position: absolute;
+  top :230px;
+  left:00px;
+//  background-image: url('../images/orangeGrad.gif');
+  background-image: url('../images/blueGrad.png');
+  background-repeat: repeat-x;
+  width: 100%;
+  height: 460px;
+}
+
+.empGridHead {
+  height: 25px;
+  width: 500px;
+  margin:0px;
+  padding: 0px;
+}
+.empGridHead tr {
+  height: 25px;
+  width: 900px;
+  margin:0px;
+  padding: 0px;
+  border-spacing: 0px;}
+	
+.empGridHead th {
+  height: 25px;
+  font-size: 14px;
+  border:0px; 
+  padding:0px;
+}
+
+#empGridBody {
+  position: absolute;
+  height: 380px;
+  width: 1180px;
+  overflow: auto;
+}
+
+.gridBodyRow {
+  width: 1190px;
+}
+
+.gridBodyRow td {
+  border:0px; 
+  padding:0px;
+}
+
+.w1 {width: 30px; text-align: left;}
+.w2 {width: 80px;}
+.w3 {width: 180px;}
+.w4 {width: 90px;}
+.w5 {width: 60px;}
+.w6 {width: 65px;}
+.w7 {width: 83px;}
+.w8 {width: 80px;}
+
+#empGridTab {
+//  height: 150px;
+  width: 1190px;
+}
+
+#empGridTots {
+  position: absolute;
+  top :640px;
+  left:00px;
+  height: 40px;
+  width: 97.2%;
+}
+
+.gridTotsRow td {
+  padding: 0px;
+}
+
+.tipTotals {
+  position: absolute;
+  top :980px;
+  left:0px;
+  background-color: #d6da3d;
+  width: 100%;
+  height: 20px;
+}
+
+.formEmpDiv {
+  position: absolute;
+  top :0px;
+  left:0px;
+  height: 450px;
+  width: 800px;;
+}	
+
+.formEmpRet {
+  position: absolute;
+  top :470px;
+  left:0px;
+  width: 100px;;
+}	
+
+.formEmpHist {
+  position: absolute;
+  top :0px;
+  left:840px;
+  width: 300px;;
+}
+
+.empHistHead {
+  font-family:"Times New Roman", Times, serif;
+  font-size: 14px;
+  font-weight:bold;
+}
+
+.empHistLine {
+  font-family:"Times New Roman", Times, serif;
+  font-size:12px;
+}
+
+#rightcol {
+  position: relative;
+  background-color: #c2ffff;
+//  background-image: url('../images/formGrad.png');
+  top :-590px;
+  width: 300px;
+  left: 1240px;
+  height: 690px;
+}
+
+.empListButts {
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  height: 19px;
+}
+
+.empAlphas {
+  position: absolute;
+  top: 25px;
+  left: 0px;
+  width:15px;
+  height: 560px;
+}
+
+.empChars {
+  height: 15px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.empListing {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  height: 580px;
+  overflow: auto;
+}
+
+.empList {
+  height: 580px;
+}
+
+.deptInfo {
+  position: relative;
+  top :0px;
+  left:0px;
+  background-color: #16d99d;
+  width: 300px;
+  height: 60px;
+  overflow: auto;
+  font-family:"Times New Roman", Times, serif;
+  font-size:10px;
+}
+
+.eeTypeInfo {
+  position: relative;
+  top :0px;
+  left:0px;
+  background-color: #16d99d;
+  width: 300px;
+  height: 60px;
+  overflow: auto;
+  font-family:"Times New Roman", Times, serif;
+  font-size:10px;
+}
+
+#tabDeptInfo {
+  font-family:"Times New Roman", Times, serif;
+  font-size:12px;
+}
+
+#tabdEeTypeInfo {
+  font-family:"Times New Roman", Times, serif;
+  font-size:12px;
+}
+
+.row1 {
+//color: #2A2DE8;
+color: black;
+}
+.row2 {
+//color: #CF1B57;
+color: black;
+
+}
+
+.offscreen {
+height: 1px;
+left: -500px;
+overflow: hidden;
+position: absolute;
+width: 1px;
+}
+
+.hidden {
+visibility:hidden;
+width:1px;
+}
+
+.numfld {
+text-align: right;
+}
+
+.txtfld {
+text-align:left;
+}
+
+.summfld {
+text-align: right;
+width: 80px;
+}
+
+.summhead {
+text-align: center;
+border: 1px solid black;
+}
+
+.repsNameCell {
+width: 180px;
+}
+
+#listHeads {
+  font-family:"Times New Roman", Times, serif;
+  font-size:18px;
+  color: #3333FF;
+}
+
+td.picked {
+background-color: #aedfcf;
+}
+
+td.notPicked {
+background-color:#c2ffff;
+}
+
+.netAcct {
+	background-color: #E9D494;
+}
+
+.selected {
+	background-color: #33D6FF;
+}
+
+.unhide {
+    display: block;
+}
+
+.hidecell {
+    display: none;
+}
+
+.funcFormCol1 {  width: 120px;}
+
+.funcFormCol2 {  width: 180px;}
+
+.funcFormCol3 {  width: 110px;}
+
+.funcFormCol4 {  width: 160px;}
+
+.funcFormCol5 {  width: 110px;}
+
+.funcFormCol6 {  width: 120px;}
+
+#defCovers {  width: 30px;}
+
+#wkEndDate {  width: 100px;}
+
+h1 {
+  font-family: Helvetica, Geneva, Arial,
+        SunSans-Regular, sans-serif }
+
+td.char {text-align: left;}
+.back1 {background-color: #99FFCC}
+.back2 {background-color: #FFFF66}
+.back3 {background-color: #31a5d8}
+.back4 {background-color: #FF4747}
+
+.funcDisp {
+        position: relative;
+        left: 400px;
+        top: -600px;
+}
+
+.fullReport {
+        font: 16px Bookman, serif;
+        width: 1300px;
+        }
+        
+//.fullReport td {
+//        text-align: right; 
+//        }
+
+.shade {background-color: #C9DBDB;}
+.unitHead {width: 33%; text-align: center;}
+.headLeft {width: 33%; text-align: left;}
+.headRight {width: 33%; text-align: right;}
+.leftBuff {width: 300px;}
+.rightBuff {width: 200px;}
+h4, h5 {height: 20px;     margin: 0; padding: 0; border: 0;}
+
+#wkendDets {
+	position:  absolute;
+  top :0px;
+  left:400px;
+}

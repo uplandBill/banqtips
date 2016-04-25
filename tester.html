@@ -1,0 +1,107 @@
+<?php
+  session_start();
+  include("db.php5");
+  $db2 = mysql_connect($hostname, $username, $password) OR DIE ("Could not conenct to Tips DB.");
+  $userId=$_SESSION['userId'];
+  $userType=$_SESSION['userType'];
+?>
+
+<html>
+<head>
+<script type="text/javascript">
+function test_emp_list() {
+   var listParms;
+   listParms={"listId":"popList", "alphaId":"popAlphas"};
+   listParms={"listId":"popList", "buttId":"popListButts"};
+   listParms={"listId":"popList", "alphaId":"popAlphas", "buttId":"popListButts"};
+   listParms={"listId":"popList", "alphaId":"popAlphas", "buttId":"popListButts"};
+   pop_ee_list("jsonGetEes","337W0", "rightcol2", listParms);
+}
+
+function test_login(postparms) {
+  if (window.XMLHttpRequest)  {// code for IE7+, Firefox, Chrome, Opera, Safari
+     var xmlhttp=new XMLHttpRequest();
+  } else  {// code for IE6, IE5
+     var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+   xmlhttp.onreadystatechange=function()  {
+      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+         if (xmlhttp.responseText =="success")
+            window.location = "http://www.banqtips.com/configs.html";
+         else 
+            alert(xmlhttp.responseText);
+      }
+   }
+  xmlhttp.open("POST","logver.php5",true);
+  xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xmlhttp.send(postparms);
+}
+
+function logout() {
+  if (window.XMLHttpRequest)  {// code for IE7+, Firefox, Chrome, Opera, Safari
+     var xmlhttp=new XMLHttpRequest();
+  } else  {// code for IE6, IE5
+     var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+   xmlhttp.onreadystatechange=function()  {
+      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+         if (xmlhttp.responseText =="success")
+            window.location = "http://www.banqtips.com/configs.html"
+      }
+   }
+  xmlhttp.open("POST","logout.php5",true);
+  xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xmlhttp.send();
+}
+
+</script>
+		
+<title> Banq Test </title>
+<link rel="stylesheet" type="text/css" href="styles/banqtips.css" />
+<link rel="stylesheet" type="text/css" href="styles/tcal.css" />
+<script type="text/javascript" src="scripts/jquery-1.8.3.js"> </script>
+<script type="text/javascript" src="scripts/tcal.js"></script>
+<script type="text/javascript" src="scripts/configs.js"> </script>
+<script type="text/javascript" src="scripts/sortable.js"></script>
+</head>
+
+</head>
+<body>
+</body>
+<div id="rightcol2"></div>
+<div id='mainMenu1' >
+	<ul id='mainMenu'>
+	</ul>
+</div>
+<div id="hiddenData3"></div>
+<div id="statusResult"></div>
+<script>
+//   test_emp_list();
+
+//   test_login("user=bill&pswd="+pswd);
+//   test_login();     //returns 'nothing'
+//   test_login("user=bill"); //returns 'lacking'
+//   test_login("pswd=bill"); //returns 'lacking'
+
+//   test_login("user=bill&pswd=bill"); //returns 'success'
+//   test_login();     //returns 'in'
+
+//    test_login("user=bill&pswd=bill"); //returns 'success'
+//    logout();
+//    test_login();     //returns 'nothing'
+
+//   test_login();
+
+//   set_image('337W0');
+
+//    get_menu("Main","bill","337W0","mainMenu");
+    
+//    var gratsGrid='{"1":{"empSeq":"1","emplid":"1041469","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"2":{"empSeq":"2","emplid":"1041271","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"3":{"empSeq":"3","emplid":"1041431","eeType":"1","payGrp":"25","emplClass":"","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"4":{"empSeq":"4","emplid":"1041453","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"5":{"empSeq":"5","emplid":"1041203","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"6":{"empSeq":"6","emplid":"1041473","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"7":{"empSeq":"7","emplid":"1041311","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"8":{"empSeq":"8","emplid":"1041447","eeType":"1","payGrp":"25","emplClass":"6","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"8.86000","foodGroup":"Captains","barRate":"8.86000","barGroup":"Captains","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"0.17","barCut":"0","totalPay":"0.17"},"9":{"empSeq":"9","emplid":"house","eeType":"2","payGrp":"25","emplClass":"","getSetup":"N","getClear":"N","getExtra":"N","eeBaseWage":"N","foodRate":"20.41300","foodGroup":"House","barRate":"20.41300","barGroup":"House","coversAllowed":"N","eeCovers":"0","eeWeight":"1","baseWage":"0","hours":"0.00","setupAmt":"0","clearAmt":"0","extraAmt":"0","foodCut":"4.44","barCut":"0","totalPay":"4.44"},"10":{"empSeq":"10","emplid":"99000024","eeType":"3","payGrp":"33","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"22.01","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"23.16"},"11":{"empSeq":"11","emplid":"99000008","eeType":"3","payGrp":"11","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"22.01","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"23.16"},"12":{"empSeq":"12","emplid":"1043959","eeType":"3","payGrp":"25","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"24.21","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"25.36"},"13":{"empSeq":"13","emplid":"1277633","eeType":"3","payGrp":"25","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"24.21","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"25.36"},"14":{"empSeq":"14","emplid":"1041255","eeType":"3","payGrp":"25","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"24.21","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"25.36"},"15":{"empSeq":"15","emplid":"1041125","eeType":"3","payGrp":"25","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"24.21","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"25.36"},"16":{"empSeq":"16","emplid":"1041220","eeType":"3","payGrp":"25","emplClass":"6","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"24.21","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"25.36"},"17":{"empSeq":"17","emplid":"1041416","eeType":"3","payGrp":"26","emplClass":"8","getSetup":"Y","getClear":"Y","getExtra":"Y","eeBaseWage":"Y","foodRate":"70.72700","foodGroup":"Waiters","barRate":"70.72700","barGroup":"Staff","coversAllowed":"Y","eeCovers":"16","eeWeight":"1","baseWage":"22.01","hours":"5.00","setupAmt":"0.00","clearAmt":"0.00","extraAmt":"0.00","foodCut":"1.15","barCut":"0","totalPay":"23.16"},"grat1":{"gratType":"X","numBodies":"100"},"grat2":{"gratType":"F","numBodies":"200"}}';
+//    var gratsJson = eval('(' +gratsGrid+ ')');
+//    xmlhttpPost3('testSaveFunc.php5?unitId=33XXX&eventNum=99', gratsJson, "statusResult");	
+  
+  var gratTypes = '{"1":{"eeType":"1","gratType":"F","groupType":"Captains","cutRate":"8.86000","netAcct":"N","gratDescr":"Food"},"2":{"eeType":"1","gratType":"B","groupType":"Captains","cutRate":"8.86000","netAcct":"N","gratDescr":"Bar"},"3":{"eeType":"1","gratType":"W","groupType":"Captains","cutRate":"8.86000","netAcct":"N","gratDescr":"Wine"},"4":{"eeType":"1","gratType":"M","groupType":"Captains","cutRate":"0.00000","netAcct":"N","gratDescr":"Manual"},"5":{"eeType":"2","gratType":"F","groupType":"House","cutRate":"20.41300","netAcct":"Y","gratDescr":"Food"},"6":{"eeType":"2","gratType":"B","groupType":"House","cutRate":"20.41300","netAcct":"Y","gratDescr":"Bar"},"7":{"eeType":"2","gratType":"W","groupType":"House","cutRate":"20.41300","netAcct":"Y","gratDescr":"Wine"},"8":{"eeType":"2","gratType":"M","groupType":"House","cutRate":"0.00000","netAcct":"N","gratDescr":"Manual"},"9":{"eeType":"3","gratType":"F","groupType":"Waiters","cutRate":"70.72700","netAcct":"N","gratDescr":"Food"},"10":{"eeType":"3","gratType":"B","groupType":"Staff","cutRate":"70.72700","netAcct":"N","gratDescr":"Bar"},"11":{"eeType":"3","gratType":"W","groupType":"Waiters","cutRate":"70.72700","netAcct":"N","gratDescr":"Wine"},"12":{"eeType":"3","gratType":"M","groupType":"Waiters","cutRate":"0.00000","netAcct":"N","gratDescr":"Manual"},"13":{"eeType":"4","gratType":"B","groupType":"Staff","cutRate":"70.72700","netAcct":"N","gratDescr":"Bar"},"14":{"eeType":"4","gratType":"M","groupType":"Staff","cutRate":"0.00000","netAcct":"N","gratDescr":"Manual"},"15":{"eeType":"5","gratType":"F","groupType":"Waiters","cutRate":"70.72700","netAcct":"N","gratDescr":"Food"},"16":{"eeType":"5","gratType":"B","groupType":"Staff","cutRate":"70.72700","netAcct":"N","gratDescr":"Bar"},"17":{"eeType":"5","gratType":"M","groupType":"Staff","cutRate":"0.00000","netAcct":"N","gratDescr":"Manual"}}';
+  
+    
+</script>
+</html>

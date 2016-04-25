@@ -1,0 +1,117 @@
+<?php
+  session_start();
+  include("db.php5");
+  $db2 = mysql_connect($hostname, $username, $password) OR DIE ("Could not conenct to Tips DB.");
+  $userId=$_SESSION['userId'];
+  $userType=$_SESSION['userType'];
+  $db=$_SESSION['db'];
+?>
+
+<!doctype html>
+<html>
+<head>
+<title> Banq Tips </title>
+<link rel="stylesheet" type="text/css" href="styles/banqtips.css" />
+<link rel="stylesheet" type="text/css" href="styles/tcal.css" />
+<script type="text/javascript" src="scripts/jquery-1.8.3.js"> </script>
+<script type="text/javascript" src="scripts/tcal.js"></script>
+<script type="text/javascript" src="scripts/configs.js"> </script>
+<script type="text/javascript" src="scripts/sortable.js"></script>
+</head>
+
+<body>
+<?php
+  if ($userId == "" || $db !== 'prod') {
+      echo "<br/>You ($userId) did not login to $db; please try again.<br/><br/>";
+      echo "<a href=../index.html title='Login' id='$userId:$db'>Click here to login.</a>";
+} else {
+//   echo "Welcome $userId $userType";
+   
+   echo "<div id='thePage'>";
+   echo "<div id='modal'></div>";
+   echo "<div id='popup_div' class='popup'></div>";
+   echo "<div id='listbox_div' class='listbox'></div>";
+   echo "<div id='tipshead'>";
+   echo "<img src='images/mainButton.png' class='mMenuButton' onclick='reports_off(); config_off(); flipTrigger(document.getElementById(\"mainMenu\"));'/>";
+   echo "<img src='images/reportsButton.png' class='reportsButton' onclick='main_off(); config_off(); flipTrigger(document.getElementById(\"reportsMenu\"));'/>";
+   echo "<img src='images/configButton.png'  class='configButton' onclick='main_off(); reports_off(); flipTrigger(document.getElementById(\"configMenu\"));'/>";
+   echo "<image id='propImage' class='banPropImg' src='images/wardmanPark1r.jpg'/>";
+   echo "</div>";
+
+   echo "<div class='leftCol'></div>";
+   echo "<div id='todoform' class='mainform'> </div>";
+   echo "<div id='rightcol'> </div>";
+
+   echo "<div id='mainMenu' class='mainMenu trigger'><ul class='menu'>";
+   $db_selected = mysql_select_db($dbname);
+   $getUnits = "select s.unitId From secUnits s, users u where u.userId = '$userId' and u.userStat='A' and s.userId = u.userId";
+   $result = mysql_query($getUnits) or die('select units failed: ' . mysql_error());
+   while ($unitsList = mysql_fetch_array($result, MYSQL_NUM)) {
+   	   $unitId = $unitsList[0];
+       echo "<li>Unit $unitId</li>";
+       echo "<ol>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); show_right(); main_reg(); func_form' . "('" . $unitId . "','enterFunc','','formarea')"                       . '" href="javascript:void(0);">Enter New Function' ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); show_right(); main_reg(); funcsWeek' . "('" . $unitId . "','edit'); "                                               . '" href="javascript:void(0);">Edit Function' ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); fillArea'  . "('" . $unitId . "','weekEndStatus','','',weekEndStatus); "         . '" href="javascript:void(0);">Open/Close Week' ."</a></li>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','startWeek','','listarea'); "                     . '" href="javascript:void(0);">Start Week' ."</a></li>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','closeWeek','','listarea'); "                     . '" href="javascript:void(0);">Close Week' ."</a></li>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','getDepts','','listarea', deptListEvents); "      . '" href="javascript:void(0);">Edit Depts' ."</a></li>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','getEmps','','listarea'); "                       . '" href="javascript:void(0);">Edit Employees' ."</a></li>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','getRooms','','listarea', deptListEvents); "      . '" href="javascript:void(0);">Edit Rooms' ."</a></li>";
+//     echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); listConfigs' . "('" . $userType . "')" . '" href="javascript:void(0);">All Configuration Options</a></li>';
+       if ($userId == "bill") {
+          echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); weekFunc1' . "('" . $unitId . "','getUsers','','listarea', deptListEvents); "      . '" href="javascript:void(0);">Security' ."</a></li>";
+          echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); fillArea'. "('" . $unitId . "','auditBaseWage','','listarea', add_new_butts); "     . '" href="javascript:void(0);">Base Wage Audit'  ."</a></li>";
+           echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); show_right(); main_reg(); funcsWeek' . "('" . $unitId . "','delete'); "                               
+              . '" href="javascript:void(0);">Delete Function' ."</a></li>";
+          echo '<li><a onclick="flipTrigger(document.getElementById(\'mainMenu\')); clearRight(); hide_right(); main_wide(); delWeekStart('. "'". $unitId ."'); "     . '" href="javascript:void(0);">Delete Week, wait what?'  ."</a></li>";
+       }
+       echo "</ol>";
+   }
+   echo "<li><a href=logout.php title='Logout'>Click here to logout.</a></li>";
+   echo "</ul></div>";
+
+   echo "<div id='reportsMenu' class='reportsMenu trigger'><ul class='menu'>";
+   $db_selected = mysql_select_db($dbname);
+   $getUnits = "select s.unitId From secUnits s, users u where u.userId = '$userId' and u.userStat='A' and s.userId = u.userId";
+   $result = mysql_query($getUnits) or die('select units failed: ' . mysql_error());
+   while ($unitsList = mysql_fetch_array($result, MYSQL_NUM)) {
+   	$unitId = $unitsList[0];
+       echo "<li>Unit $unitId</li>";
+       echo "<ol>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'reportsMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','repWeekFuncs','','listarea', add_new_butts); "   . '" href="javascript:void(0);">All Functions for Week' ."</a></li>";
+       echo '<li><a onclick="window.open(\'repWeekFuncs.php?unitId=' .$unitId .'\')"; href="javascript:void(0);"> All Functions for Week' ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'reportsMenu\')); clearRight(); hide_right(); main_wide(); call_report' . "('" . $unitId . "','repWeekCsv.php','1','listarea', add_csv_butts); "     . '" href="javascript:void(0);">Banquets Week Summary / Download'  ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'reportsMenu\')); clearRight(); hide_right(); main_wide(); call_report' . "('" . $unitId . "','repWeekCsv.php','2','listarea', add_csv_butts); "     . '" href="javascript:void(0);">Coffee Break Week Summary / Download'  ."</a></li>";
+       echo '<li><a onclick="window.open(\'repWeekTape.php?unitId=' .$unitId .'\')"; href="javascript:void(0);"> Tape - Audit' ."</a></li>";
+       echo '<li><a onclick="window.open(\'repWeekNonEmp.php?unitId=' .$unitId .'\')"; href="javascript:void(0);"> Non-Employee Summary' ."</a></li>";
+       echo '<li><a onclick="window.open(\'repWeekEe.php?unitId=' .$unitId .'\')"; href="javascript:void(0);"> EE Week Summary' ."</a></li>";
+//       echo '<li><a onclick="flipTrigger(document.getElementById(\'reportsMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','repWeekEe','','listarea', add_eeSumm_butts); "   . '" href="javascript:void(0);">EE Week Summary' ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'reportsMenu\')); clearRight(); hide_right(); main_wide(); eeSummWeek'. "('" . $unitId . "','repWeekCsv','','listarea', add_csv_butts); "     . '" href="javascript:void(0);">EE Summaries'  ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'reportsMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','auditWeek','','listarea', add_audit_butts); " . '" href="javascript:void(0);">Audit Report'  ."</a></li>";
+       echo '<li><a onclick="window.open(\'getEmpList.php?unitId=' .$unitId .'\')"; href="javascript:void(0);"> Simple EE List' ."</a></li>";
+       echo "</ol>";
+   } 
+   echo "</div>";
+
+   echo "<div id='configMenu' class='configMenu trigger'><ul class='menu'>";
+   $db_selected = mysql_select_db($dbname);
+   $getUnits = "select s.unitId From secUnits s, users u where u.userId = '$userId' and u.userStat='A' and s.userId = u.userId";
+   $result = mysql_query($getUnits) or die('select units failed: ' . mysql_error());
+   while ($unitsList = mysql_fetch_array($result, MYSQL_NUM)) {
+    $unitId = $unitsList[0];
+       echo "<li>Unit $unitId</li>";
+       echo "<ol>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'configMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','getDepts','','listarea', deptListEvents); "      . '" href="javascript:void(0);">Edit Depts' ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'configMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','getEmps','','listarea'); "                       . '" href="javascript:void(0);">Edit Employees' ."</a></li>";
+       echo '<li><a onclick="flipTrigger(document.getElementById(\'configMenu\')); clearRight(); hide_right(); main_wide(); weekFunc1' . "('" . $unitId . "','getRooms','','listarea', deptListEvents); "      . '" href="javascript:void(0);">Edit Rooms' ."</a></li>";
+       echo "</ol>";
+   } 
+   echo "</div>";
+
+   echo "</div>";
+   echo "<div class='footer'></div>";
+}
+?>
+</body>
+</html>
