@@ -40,7 +40,7 @@
     }
   } else {
      $rows1 = $rows1 . " missing id & pswd/";
-     echo $rows1;
+//     echo $rows1;
  }
 ?>
 <html>
@@ -76,8 +76,13 @@
 <!-- <img class="banner" src="./images/banqTips.png"/> -->
 <div class="thePage">
 <?php
+  if (isset($_POST["user"])) {
+    $user = $_POST["user"];
+    $pswd = $_POST["pswd"];
+  } else {
      $user = $_POST["user"];
      $pswd = $_POST["pswd"];
+  }
      if ($user && $pswd) {
      	   echo "<h2>You did not login; please try again" . $rows . ".</h2>";
      	   $_SESSION['userId']="";
