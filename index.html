@@ -2,8 +2,13 @@
   ini_set('display_errors',1);
 //  error_reporting(E_ALL);     
   session_start();
-  $user = $_POST["user"];
-  $pswd = $_POST["pswd"];
+  if ($_POST["uer"]) {
+    $user = $_POST["user"];
+    $pswd = $_POST["pswd"];
+  } else {
+    $user="";
+    $pswd=""
+  }
   $rows1="";
   if ($user && $pswd) {
     include("db.php5");
